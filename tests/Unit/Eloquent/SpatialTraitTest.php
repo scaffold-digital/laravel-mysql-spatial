@@ -580,7 +580,7 @@ class TestPDO extends PDO
 
     public $counter = 1;
 
-    public function prepare($statement, $driver_options = []): MockInterface
+    public function prepare($statement, $driver_options = []): PDOStatement | false
     {
         $this->queries[] = $statement;
 
