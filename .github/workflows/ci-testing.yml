@@ -3,7 +3,7 @@ name: CI Testing
 on: [push, pull_request]
 
 jobs:
-  setup-mysql:
+  test-code:
     runs-on: ubuntu-latest
 
     services:
