@@ -12,7 +12,7 @@ class MysqlConnectionTest extends TestCase
     protected function setUp(): void
     {
         $mysqlConfig = ['driver' => 'mysql', 'prefix' => 'prefix', 'database' => 'database', 'name' => 'foo'];
-        $this->mysqlConnection = new MysqlConnection(new PDOStub(), 'database', 'prefix', $mysqlConfig);
+        $this->mysqlConnection = new MysqlConnection(new PDOStub('mysql'), 'database', 'prefix', $mysqlConfig);
     }
 
     public function testGetSchemaBuilder()
@@ -20,5 +20,7 @@ class MysqlConnectionTest extends TestCase
         $builder = $this->mysqlConnection->getSchemaBuilder();
 
         $this->assertInstanceOf(Builder::class, $builder);
+
+        \Mockery::close();
     }
 }
