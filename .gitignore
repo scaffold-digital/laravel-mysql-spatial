@@ -5,3 +5,4 @@ _db/
 build/
 .DS_STORE
 .phpunit.result.cache
+_db-8.0
