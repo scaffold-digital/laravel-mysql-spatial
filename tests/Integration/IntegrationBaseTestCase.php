@@ -1,8 +1,8 @@
 <?php
 
-use Grimzy\LaravelMysqlSpatial\SpatialServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
+use ScaffoldDigital\LaravelMysqlSpatial\SpatialServiceProvider;
 
 abstract class IntegrationBaseTestCase extends BaseTestCase
 {
@@ -16,7 +16,7 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
      */
     public function createApplication()
     {
-        $app = require __DIR__.'/../../vendor/laravel/laravel/bootstrap/app.php';
+        $app = require __DIR__ . '/../../vendor/laravel/laravel/bootstrap/app.php';
         $app->register(SpatialServiceProvider::class);
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();

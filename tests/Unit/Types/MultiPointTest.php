@@ -1,7 +1,7 @@
 <?php
 
-use Grimzy\LaravelMysqlSpatial\Types\MultiPoint;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 
 class MultiPointTest extends BaseTestCase
 {
@@ -43,7 +43,7 @@ class MultiPointTest extends BaseTestCase
     public function testInvalidGeoJsonException()
     {
         $this->assertException(
-            \Grimzy\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
+            \ScaffoldDigital\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
             sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPoint::class, GeoJson\Geometry\Point::class)
         );
         MultiPoint::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
@@ -63,7 +63,7 @@ class MultiPointTest extends BaseTestCase
     {
         $this->assertException(
             InvalidArgumentException::class,
-            'Grimzy\LaravelMysqlSpatial\Types\MultiPoint must contain at least 1 entry'
+            'ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint must contain at least 1 entry'
         );
         $multipoint = new MultiPoint([]);
     }
@@ -72,7 +72,7 @@ class MultiPointTest extends BaseTestCase
     {
         $this->assertException(
             InvalidArgumentException::class,
-            'Grimzy\LaravelMysqlSpatial\Types\MultiPoint must be a collection of Grimzy\LaravelMysqlSpatial\Types\Point'
+            'ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint must be a collection of ScaffoldDigital\LaravelMysqlSpatial\Types\Point'
         );
         $multipoint = new MultiPoint([
             new Point(0, 0),
@@ -98,7 +98,7 @@ class MultiPointTest extends BaseTestCase
         // assert invalid
         $this->assertException(
             InvalidArgumentException::class,
-            'Grimzy\LaravelMysqlSpatial\Types\MultiPoint must be a collection of Grimzy\LaravelMysqlSpatial\Types\Point'
+            'ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint must be a collection of ScaffoldDigital\LaravelMysqlSpatial\Types\Point'
         );
         $multipoint[] = 1;
     }

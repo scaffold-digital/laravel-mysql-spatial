@@ -1,13 +1,13 @@
 <?php
 
-namespace Grimzy\LaravelMysqlSpatial\Eloquent;
+namespace ScaffoldDigital\LaravelMysqlSpatial\Eloquent;
 
-use Grimzy\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException;
-use Grimzy\LaravelMysqlSpatial\Exceptions\UnknownSpatialFunctionException;
-use Grimzy\LaravelMysqlSpatial\Exceptions\UnknownSpatialRelationFunction;
-use Grimzy\LaravelMysqlSpatial\Types\Geometry;
-use Grimzy\LaravelMysqlSpatial\Types\GeometryInterface;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException;
+use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\UnknownSpatialFunctionException;
+use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\UnknownSpatialRelationFunction;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\Geometry;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\GeometryInterface;
 
 /**
  * Trait SpatialTrait.
@@ -63,7 +63,7 @@ trait SpatialTrait
      *
      * @param \Illuminate\Database\Query\Builder $query
      *
-     * @return \Grimzy\LaravelMysqlSpatial\Eloquent\Builder
+     * @return \ScaffoldDigital\LaravelMysqlSpatial\Eloquent\Builder
      */
     public function newEloquentBuilder($query)
     {
@@ -117,7 +117,7 @@ trait SpatialTrait
         if (property_exists($this, 'spatialFields')) {
             return $this->spatialFields;
         } else {
-            throw new SpatialFieldsNotDefinedException(__CLASS__.' has to define $spatialFields');
+            throw new SpatialFieldsNotDefinedException(__CLASS__ . ' has to define $spatialFields');
         }
     }
 

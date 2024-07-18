@@ -1,8 +1,8 @@
 <?php
 
-use Grimzy\LaravelMysqlSpatial\Connectors\ConnectionFactory;
-use Grimzy\LaravelMysqlSpatial\MysqlConnection;
 use Illuminate\Container\Container;
+use ScaffoldDigital\LaravelMysqlSpatial\Connectors\ConnectionFactory;
+use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use Stubs\PDOStub;
 
 class ConnectionFactoryBaseTest extends BaseTestCase

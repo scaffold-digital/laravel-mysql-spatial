@@ -1,10 +1,10 @@
 <?php
 
-namespace Grimzy\LaravelMysqlSpatial\Schema\Grammars;
+namespace ScaffoldDigital\LaravelMysqlSpatial\Schema\Grammars;
 
-use Grimzy\LaravelMysqlSpatial\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\MySqlGrammar as IlluminateMySqlGrammar;
 use Illuminate\Support\Fluent;
+use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
 
 class MySqlGrammar extends IlluminateMySqlGrammar
 {
@@ -138,7 +138,7 @@ class MySqlGrammar extends IlluminateMySqlGrammar
     protected function modifySrid(\Illuminate\Database\Schema\Blueprint $blueprint, Fluent $column)
     {
         if (!is_null($column->srid) && is_int($column->srid) && $column->srid > 0) {
-            return ' srid '.$column->srid;
+            return ' srid ' . $column->srid;
         }
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
+use ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 
 /**
  * Class NoSpatialFieldsModel.
  *
- * @property \Grimzy\LaravelMysqlSpatial\Types\Geometry geometry
+ * @property \ScaffoldDigital\LaravelMysqlSpatial\Types\Geometry geometry
  */
 class NoSpatialFieldsModel extends Model
 {

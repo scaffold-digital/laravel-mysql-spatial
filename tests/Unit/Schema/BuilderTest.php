@@ -3,10 +3,10 @@
 namespace Schema;
 
 use BaseTestCase;
-use Grimzy\LaravelMysqlSpatial\MysqlConnection;
-use Grimzy\LaravelMysqlSpatial\Schema\Blueprint;
-use Grimzy\LaravelMysqlSpatial\Schema\Builder;
 use Mockery;
+use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
+use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
+use ScaffoldDigital\LaravelMysqlSpatial\Schema\Builder;
 
 class BuilderTest extends BaseTestCase
 {

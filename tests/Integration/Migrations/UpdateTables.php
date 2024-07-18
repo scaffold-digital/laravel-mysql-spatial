@@ -1,8 +1,8 @@
 <?php
 
-use Grimzy\LaravelMysqlSpatial\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
+use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
 
 class UpdateLocationTable extends Migration
 {

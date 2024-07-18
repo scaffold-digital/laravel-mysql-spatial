@@ -1,16 +1,16 @@
 <?php
 
-namespace Grimzy\LaravelMysqlSpatial\Types;
+namespace ScaffoldDigital\LaravelMysqlSpatial\Types;
 
 use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use GeoJson\Feature\FeatureCollection;
 use GeoJson\GeoJson;
-use Grimzy\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 use Illuminate\Contracts\Support\Arrayable;
 use InvalidArgumentException;
 use IteratorAggregate;
+use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAccess, Arrayable, Countable
 {
@@ -78,7 +78,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
         return new static(array_map(function ($geometry_string) {
             $klass = Geometry::getWKTClass($geometry_string);
 
-            return call_user_func($klass.'::fromWKT', $geometry_string);
+            return call_user_func($klass . '::fromWKT', $geometry_string);
         }, $geometry_strings), $srid);
     }
 
@@ -130,7 +130,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
         }
 
         if (!is_a($geoJson, FeatureCollection::class)) {
-            throw new InvalidGeoJsonException('Expected '.FeatureCollection::class.', got '.get_class($geoJson));
+            throw new InvalidGeoJsonException('Expected ' . FeatureCollection::class . ', got ' . get_class($geoJson));
         }
 
         $set = [];

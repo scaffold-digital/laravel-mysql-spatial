@@ -1,10 +1,10 @@
 <?php
 
-namespace Grimzy\LaravelMysqlSpatial\Types;
+namespace ScaffoldDigital\LaravelMysqlSpatial\Types;
 
 use GeoJson\GeoJson;
 use GeoJson\Geometry\Point as GeoJsonPoint;
-use Grimzy\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
+use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class Point extends Geometry
 {
@@ -42,7 +42,7 @@ class Point extends Geometry
 
     public function toPair()
     {
-        return $this->getLng().' '.$this->getLat();
+        return $this->getLng() . ' ' . $this->getLat();
     }
 
     public static function fromPair($pair, $srid = 0)
@@ -64,13 +64,13 @@ class Point extends Geometry
 
     public function __toString()
     {
-        return $this->getLng().' '.$this->getLat();
+        return $this->getLng() . ' ' . $this->getLat();
     }
 
     /**
      * @param $geoJson  \GeoJson\Feature\Feature|string
      *
-     * @return \Grimzy\LaravelMysqlSpatial\Types\Point
+     * @return \ScaffoldDigital\LaravelMysqlSpatial\Types\Point
      */
     public static function fromJson($geoJson)
     {
@@ -79,7 +79,7 @@ class Point extends Geometry
         }
 
         if (!is_a($geoJson, GeoJsonPoint::class)) {
-            throw new InvalidGeoJsonException('Expected '.GeoJsonPoint::class.', got '.get_class($geoJson));
+            throw new InvalidGeoJsonException('Expected ' . GeoJsonPoint::class . ', got ' . get_class($geoJson));
         }
 
         $coordinates = $geoJson->getCoordinates();

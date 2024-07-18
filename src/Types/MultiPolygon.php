@@ -1,10 +1,10 @@
 <?php
 
-namespace Grimzy\LaravelMysqlSpatial\Types;
+namespace ScaffoldDigital\LaravelMysqlSpatial\Types;
 
 use GeoJson\GeoJson;
 use GeoJson\Geometry\MultiPolygon as GeoJsonMultiPolygon;
-use Grimzy\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
+use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException;
 
 class MultiPolygon extends GeometryCollection
 {
@@ -80,7 +80,7 @@ class MultiPolygon extends GeometryCollection
             if ($i % 2 !== 0) {
                 list($end, $start) = explode(',', $parts[$i]);
                 $polygons[$i - 1] .= $end;
-                $polygons[++$i] = $start.$parts[$i];
+                $polygons[++$i] = $start . $parts[$i];
             } else {
                 $polygons[] = $parts[$i];
             }
@@ -103,7 +103,7 @@ class MultiPolygon extends GeometryCollection
         }
 
         if (!is_a($geoJson, GeoJsonMultiPolygon::class)) {
-            throw new InvalidGeoJsonException('Expected '.GeoJsonMultiPolygon::class.', got '.get_class($geoJson));
+            throw new InvalidGeoJsonException('Expected ' . GeoJsonMultiPolygon::class . ', got ' . get_class($geoJson));
         }
 
         $set = [];

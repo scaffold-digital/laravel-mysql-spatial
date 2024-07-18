@@ -1,10 +1,10 @@
 <?php
 
-namespace Grimzy\LaravelMysqlSpatial\Connectors;
+namespace ScaffoldDigital\LaravelMysqlSpatial\Connectors;
 
-use Grimzy\LaravelMysqlSpatial\MysqlConnection;
 use Illuminate\Database\Connectors\ConnectionFactory as IlluminateConnectionFactory;
 use PDO;
+use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 
 class ConnectionFactory extends IlluminateConnectionFactory
 {

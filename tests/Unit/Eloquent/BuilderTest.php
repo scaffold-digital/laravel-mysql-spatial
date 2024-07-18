@@ -3,17 +3,17 @@
 namespace Eloquent;
 
 use BaseTestCase;
-use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
-use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialExpression;
-use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
-use Grimzy\LaravelMysqlSpatial\MysqlConnection;
-use Grimzy\LaravelMysqlSpatial\Types\LineString;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Mockery;
+use ScaffoldDigital\LaravelMysqlSpatial\Eloquent\Builder;
+use ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialExpression;
+use ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
 
 class BuilderTest extends BaseTestCase
 {

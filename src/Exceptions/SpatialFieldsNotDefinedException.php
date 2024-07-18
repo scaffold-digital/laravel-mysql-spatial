@@ -1,6 +1,6 @@
 <?php
 
-namespace Grimzy\LaravelMysqlSpatial\Exceptions;
+namespace ScaffoldDigital\LaravelMysqlSpatial\Exceptions;
 
 class SpatialFieldsNotDefinedException extends \RuntimeException
 {
