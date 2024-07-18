@@ -9,7 +9,7 @@ start_db:
             -p 3306:3306 \
             -v $(DB_DIR):/var/lib/mysql \
             -e MYSQL_DATABASE=spatial_test \
-            -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+            -e MYSQL_ROOT_PASSWORD=password \
             mysql:$(V) --character-set-server=utf8 --collation-server=utf8_general_ci --default-authentication-plugin=mysql_native_password
 
 start_db_maria:
@@ -18,7 +18,7 @@ start_db_maria:
 			-p 3306:3306 \
 			-v $(DB_DIR):/var/lib/mysql \
 			-e MYSQL_DATABASE=spatial_test \
-			-e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+			-e MYSQL_ROOT_PASSWORD=password \
 			mariadb:$(mV) --character-set-server=utf8 --collation-server=utf8_general_ci --default-authentication-plugin=mysql_native_password
 
 
