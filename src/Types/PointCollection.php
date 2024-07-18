@@ -21,7 +21,7 @@ abstract class PointCollection extends GeometryCollection
         }, $this->items));
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->validateItemType($value);
 
