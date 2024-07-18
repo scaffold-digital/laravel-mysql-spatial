@@ -4,7 +4,7 @@ use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Grammars\MySqlGrammar;
 
-class MySqlGrammarBaseTest extends BaseTestCase
+class MySqlGrammarTest extends BaseTestCase
 {
     public function testAddingGeometry()
     {
