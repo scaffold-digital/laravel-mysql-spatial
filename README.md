@@ -1,22 +1,19 @@
 # Laravel MySQL Spatial extension
 
-[![Build Status](https://img.shields.io/travis/grimzy/laravel-mysql-spatial.svg?style=flat-square)](https://travis-ci.org/grimzy/laravel-mysql-spatial)
-[![Code Climate](https://img.shields.io/codeclimate/maintainability/grimzy/laravel-mysql-spatial.svg?style=flat-square)](https://codeclimate.com/github/grimzy/laravel-mysql-spatial/maintainability)
-[![Code Climate](https://img.shields.io/codeclimate/c/grimzy/laravel-mysql-spatial.svg?style=flat-square&colorB=4BCA2A)](https://codeclimate.com/github/grimzy/laravel-mysql-spatial/test_coverage) [![Packagist](https://img.shields.io/packagist/v/grimzy/laravel-mysql-spatial.svg?style=flat-square)](https://packagist.org/packages/grimzy/laravel-mysql-spatial)
-[![Packagist](https://img.shields.io/packagist/dt/grimzy/laravel-mysql-spatial.svg?style=flat-square)](https://packagist.org/packages/grimzy/laravel-mysql-spatial) [![StyleCI](https://github.styleci.io/repos/83766141/shield?branch=master)](https://github.styleci.io/repos/83766141) 
+[![Packagist](https://img.shields.io/packagist/v/scaffold-digital/laravel-mysql-spatial.svg?style=flat-square)](https://packagist.org/packages/scaffold-digital/laravel-mysql-spatial)
+[![Packagist](https://img.shields.io/packagist/dt/scaffold-digital/laravel-mysql-spatial.svg?style=flat-square)](https://packagist.org/packages/scaffold-digital/laravel-mysql-spatial)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](LICENSE)
 
-Laravel package to easily work with [MySQL Spatial Data Types](https://dev.mysql.com/doc/refman/8.0/en/spatial-type-overview.html) and [MySQL Spatial Functions](https://dev.mysql.com/doc/refman/8.0/en/spatial-function-reference.html).
+Laravel package to easily work with [MySQL Spatial Data Types](https://dev.mysql.com/doc/refman/8.0/en/spatial-type-overview.html)
+and [MySQL Spatial Functions](https://dev.mysql.com/doc/refman/8.0/en/spatial-function-reference.html).
 
-Please check the documentation for your MySQL version. MySQL's Extension for Spatial Data was added in MySQL 5.5 but many Spatial Functions were changed in 5.6 and 5.7.
+Please check the documentation for your MySQL version. MySQL's Extension for
+Spatial Data was added in MySQL 5.5 but many Spatial Functions were changed in
+5.6 and 5.7.
 
 **Versions**
 
-- `1.x.x`: MySQL 5.6 (also supports MySQL 5.5 but not all spatial analysis functions)
-- `2.x.x`: MySQL 5.7 and 8.0 (Laravel version < 8.0)
-- `3.x.x`: MySQL 8.0 with SRID support (Laravel version < 8.0)
-- **`4.x.x`: MySQL 8.0 with SRID support (Laravel 8+) [Current branch]**
-- `5.x.x`: MySQL 5.7 and 8.0 (Laravel 8+)
+- `5.x.x`: MySQL 5.7 and 8.0 (Laravel 8)
 
 This package also works with MariaDB. Please refer to the [MySQL/MariaDB Spatial Support Matrix](https://mariadb.com/kb/en/library/mysqlmariadb-spatial-support-matrix/) for compatibility.
 
@@ -25,36 +22,10 @@ This package also works with MariaDB. Please refer to the [MySQL/MariaDB Spatial
 Add the package using composer:
 
 ```sh
-$ composer require grimzy/laravel-mysql-spatial:^4.0
-
-# or for Laravel version < 8.0
-$ composer require grimzy/laravel-mysql-spatial:^3.0
+$ composer require scaffold-digital/laravel-mysql-spatial:^5.0
 ```
 
-For MySQL 5.7:
-
-```shell
-$ composer require grimzy/laravel-mysql-spatial:^2.0
-```
-
-For MySQL 5.6 and 5.5:
-
-```shell
-$ composer require grimzy/laravel-mysql-spatial:^1.0
-```
-
-For Laravel versions before 5.5 or if not using auto-discovery, register the service provider in `config/app.php`:
-
-```php
-'providers' => [
-  /*
-   * Package Service Providers...
-   */
-  Grimzy\LaravelMysqlSpatial\SpatialServiceProvider::class,
-],
-```
-
-## Quickstart
+## Quick start
 
 ### Create a migration
 
@@ -64,14 +35,12 @@ From the command line:
 php artisan make:migration create_places_table
 ```
 
-Then edit the migration you just created by adding at least one spatial data field. For Laravel versions prior to 5.5, you can use the Blueprint provided by this package (Grimzy\LaravelMysqlSpatial\Schema\Blueprint):
+Then edit the migration you just created by adding at least one spatial data
+field:
 
 ```php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-
-// For Laravel < 5.5
-// use Grimzy\LaravelMysqlSpatial\Schema\Blueprint;
 
 class CreatePlacesTable extends Migration {
 
@@ -133,17 +102,19 @@ From the command line:
 php artisan make:model Place
 ```
 
-Then edit the model you just created. It must use the `SpatialTrait` and define an array called `$spatialFields` with the name of the MySQL Spatial Data field(s) created in the migration:
+Then edit the model you just created. It must use the `SpatialTrait` and define
+an array called `$spatialFields` with the name of the MySQL Spatial Data
+field(s) created in the migration:
 
 ```php
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 
 /**
- * @property \Grimzy\LaravelMysqlSpatial\Types\Point   $location
- * @property \Grimzy\LaravelMysqlSpatial\Types\Polygon $area
+ * @property \ScaffoldDigital\LaravelMysqlSpatial\Types\Point   $location
+ * @property \ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon $area
  */
 class Place extends Model
 {
@@ -163,9 +134,9 @@ class Place extends Model
 ### Saving a model
 
 ```php
-use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Grimzy\LaravelMysqlSpatial\Types\Polygon;
-use Grimzy\LaravelMysqlSpatial\Types\LineString;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 
 $place1 = new Place();
 $place1->name = 'Empire State Building';
@@ -188,15 +159,15 @@ $place1->save();
 Or if your database fields were created with a specific SRID:
 
 ```php
-use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Grimzy\LaravelMysqlSpatial\Types\Polygon;
-use Grimzy\LaravelMysqlSpatial\Types\LineString;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 
 $place1 = new Place();
 $place1->name = 'Empire State Building';
 
 // saving a point with SRID 4326 (WGS84 spheroid)
-$place1->location = new Point(40.7484404, -73.9878441, 4326);	// (lat, lng, srid)
+$place1->location = new Point(40.7484404, -73.9878441, 4326); // (lat, lng, srid)
 $place1->save();
 
 // saving a polygon with SRID 4326 (WGS84 spheroid)
@@ -210,9 +181,13 @@ $place1->area = new Polygon([new LineString([
 $place1->save();
 ```
 
-> **Note**: When saving collection Geometries (`LineString`, `Polygon`, `MultiPoint`, `MultiLineString`, and `GeometryCollection`), only the top-most geometry should have an SRID set in the constructor.
+> **Note**: When saving collection Geometries (`LineString`, `Polygon`,
+> `MultiPoint`, `MultiLineString`, and `GeometryCollection`), only the top-most
+> geometry should have an SRID set in the constructor.
 >
-> In the example above, when creating a `new Polygon()`, we only set the SRID on the `Polygon` and use the default for the `LineString` and the `Point` objects.
+> In the example above, when creating a `new Polygon()`, we only set the SRID on
+> the `Polygon` and use the default for the `LineString` and the `Point`
+> objects.
 
 ### Retrieving a model
 
@@ -226,25 +201,32 @@ $lng = $place2->location->getLng();	// -73.9878441
 
 ### Available Geometry classes
 
-| Grimzy\LaravelMysqlSpatial\Types                             | OpenGIS Class                                                |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `Point($lat, $lng, $srid = 0)`                               | [Point](https://dev.mysql.com/doc/refman/8.0/en/gis-class-point.html) |
-| `MultiPoint(Point[], $srid = 0)`                             | [MultiPoint](https://dev.mysql.com/doc/refman/8.0/en/gis-class-multipoint.html) |
-| `LineString(Point[], $srid = 0)`                             | [LineString](https://dev.mysql.com/doc/refman/8.0/en/gis-class-linestring.html) |
-| `MultiLineString(LineString[], $srid = 0)`                   | [MultiLineString](https://dev.mysql.com/doc/refman/8.0/en/gis-class-multilinestring.html) |
-| `Polygon(LineString[], $srid = 0)` *([exterior and interior boundaries](https://dev.mysql.com/doc/refman/8.0/en/gis-class-polygon.html))* | [Polygon](https://dev.mysql.com/doc/refman/8.0/en/gis-class-polygon.html) |
-| `MultiPolygon(Polygon[], $srid = 0)`                         | [MultiPolygon](https://dev.mysql.com/doc/refman/8.0/en/gis-class-multipolygon.html) |
-| `GeometryCollection(Geometry[], $srid = 0)`                  | [GeometryCollection](https://dev.mysql.com/doc/refman/8.0/en/gis-class-geometrycollection.html) |
+| ScaffoldDigital\LaravelMysqlSpatial\Types                                                                                                 | OpenGIS Class                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `Point($lat, $lng, $srid = 0)`                                                                                                            | [Point](https://dev.mysql.com/doc/refman/8.0/en/gis-class-point.html)                           |
+| `MultiPoint(Point[], $srid = 0)`                                                                                                          | [MultiPoint](https://dev.mysql.com/doc/refman/8.0/en/gis-class-multipoint.html)                 |
+| `LineString(Point[], $srid = 0)`                                                                                                          | [LineString](https://dev.mysql.com/doc/refman/8.0/en/gis-class-linestring.html)                 |
+| `MultiLineString(LineString[], $srid = 0)`                                                                                                | [MultiLineString](https://dev.mysql.com/doc/refman/8.0/en/gis-class-multilinestring.html)       |
+| `Polygon(LineString[], $srid = 0)` *([exterior and interior boundaries](https://dev.mysql.com/doc/refman/8.0/en/gis-class-polygon.html))* | [Polygon](https://dev.mysql.com/doc/refman/8.0/en/gis-class-polygon.html)                       |
+| `MultiPolygon(Polygon[], $srid = 0)`                                                                                                      | [MultiPolygon](https://dev.mysql.com/doc/refman/8.0/en/gis-class-multipolygon.html)             |
+| `GeometryCollection(Geometry[], $srid = 0)`                                                                                               | [GeometryCollection](https://dev.mysql.com/doc/refman/8.0/en/gis-class-geometrycollection.html) |
 
 Check out the [Class diagram](https://user-images.githubusercontent.com/1837678/30788608-a5afd894-a16c-11e7-9a51-0a08b331d4c4.png).
 
 ### Using Geometry classes
 
-In order for your Eloquent Model to handle the Geometry classes, it must use the `Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait` trait and define a `protected` property `$spatialFields`  as an array of MySQL Spatial Data Type column names (example in [Quickstart](#user-content-create-a-model)).
+In order for your Eloquent Model to handle the Geometry classes, it must use the
+`ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialTrait` trait and define a
+`protected` property `$spatialFields`  as an array of MySQL Spatial Data Type
+column names (example in [Quick start](#user-content-create-a-model)).
 
 #### IteratorAggregate and ArrayAccess
 
-The collection Geometries (`LineString`, `Polygon`, `MultiPoint`, `MultiLineString`, and `GeometryCollection`) implement [`IteratorAggregate`](http://php.net/manual/en/class.iteratoraggregate.php) and [`ArrayAccess`](http://php.net/manual/en/class.arrayaccess.php); making it easy to perform Iterator and Array operations. For example:
+The collection Geometries (`LineString`, `Polygon`, `MultiPoint`,
+`MultiLineString`, and `GeometryCollection`) implement
+[`IteratorAggregate`](http://php.net/manual/en/class.iteratoraggregate.php) and
+[`ArrayAccess`](http://php.net/manual/en/class.arrayaccess.php); making it easy
+to perform Iterator and Array operations. For example:
 
 ```php
 $polygon = $multipolygon[10];	// ArrayAccess
@@ -282,7 +264,9 @@ $polygon = Polygon::fromString('(0 0,4 0,4 4,0 4,0 0),(1 1, 2 1, 2 2, 1 2,1 1)')
 
 ##### From/To JSON ([GeoJSON](http://geojson.org/))
 
-The Geometry classes implement [`JsonSerializable`](http://php.net/manual/en/class.jsonserializable.php) and `Illuminate\Contracts\Support\Jsonable` to help serialize into GeoJSON:
+The Geometry classes implement
+[`JsonSerializable`](http://php.net/manual/en/class.jsonserializable.php) and
+`Illuminate\Contracts\Support\Jsonable` to help serialize into GeoJSON:
 
 ```php
 $point = new Point(40.7484404, -73.9878441);
@@ -302,7 +286,8 @@ json_encode($point); // or $point->toJson();
 // }
 ```
 
-To deserialize a GeoJSON string into a Geometry class, you can use `Geometry::fromJson($json_string)` :
+To deserialize a GeoJSON string into a Geometry class, you can use
+`Geometry::fromJson($json_string)` :
 
 ```php
 $location = Geometry::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
@@ -313,7 +298,8 @@ $location->getLng()); // 3.4
 
 ## Scopes: Spatial analysis functions
 
-Spatial analysis functions are implemented using [Eloquent Local Scopes](https://laravel.com/docs/5.4/eloquent#local-scopes).
+Spatial analysis functions are implemented using
+[Eloquent Local Scopes](https://laravel.com/docs/5.4/eloquent#local-scopes).
 
 Available scopes:
 
@@ -334,20 +320,9 @@ Available scopes:
 - `orderByDistance($geometryColumn, $geometry, $direction = 'asc')`
 - `orderByDistanceSphere($geometryColumn, $geometry, $direction = 'asc')`
 
-*Note that behavior and availability of MySQL spatial analysis functions differs in each MySQL version (cf. [documentation](https://dev.mysql.com/doc/refman/8.0/en/spatial-function-reference.html)).*
+*Note that behavior and availability of MySQL spatial analysis functions differs
+in each MySQL version (cf. [documentation](https://dev.mysql.com/doc/refman/8.0/en/spatial-function-reference.html)).*
 
-## Migrations
-
-For Laravel versions prior to 5.5, you can use the Blueprint provided with this package: `Grimzy\LaravelMysqlSpatial\Schema\Blueprint`.
-
-```php
-use Illuminate\Database\Migrations\Migration;
-use Grimzy\LaravelMysqlSpatial\Schema\Blueprint;
-
-class CreatePlacesTable extends Migration {
-    // ...
-}
-```
 
 ### Columns
 
@@ -364,18 +339,25 @@ Available [MySQL Spatial Types](https://dev.mysql.com/doc/refman/8.0/en/spatial-
 
 ### Spatial indexes
 
-You can add or drop spatial indexes in your migrations with the `spatialIndex` and `dropSpatialIndex` blueprints.
+You can add or drop spatial indexes in your migrations with the `spatialIndex`
+and `dropSpatialIndex` blueprints.
 
 - `$table->spatialIndex('column_name')`
-- `$table->dropSpatialIndex(['column_name'])` or `$table->dropSpatialIndex('index_name')`
+- `$table->dropSpatialIndex(['column_name'])` or
+`$table->dropSpatialIndex('index_name')`
 
 Note about spatial indexes from the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/creating-spatial-indexes.html):
 
-> For [`MyISAM`](https://dev.mysql.com/doc/refman/8.0/en/myisam-storage-engine.html) and (as of MySQL 5.7.5) `InnoDB` tables, MySQL can create spatial indexes using syntax similar to that for creating regular indexes, but using the `SPATIAL` keyword. Columns in spatial indexes must be declared `NOT NULL`.
+> For [`MyISAM`](https://dev.mysql.com/doc/refman/8.0/en/myisam-storage-engine.html)
+> and (as of MySQL 5.7.5) `InnoDB` tables, MySQL can create spatial indexes
+> using syntax similar to that for creating regular indexes, but using the
+> `SPATIAL` keyword. Columns in spatial indexes must be declared `NOT NULL`.
 
-Also please read this [**important note**](https://laravel.com/docs/5.5/migrations#indexes) regarding Index Lengths in the Laravel 5.6 documentation.
+Also please read this [**important note**](https://laravel.com/docs/5.5/migrations#indexes)
+regarding Index Lengths in the Laravel 5.6 documentation.
 
-For example, as a follow up to the [Quickstart](#user-content-create-a-migration); from the command line, generate a new migration:
+For example, as a follow up to the [Quickstart](#user-content-create-a-migration);
+from the command line, generate a new migration:
 
 ```shell
 php artisan make:migration update_places_table
@@ -417,7 +399,8 @@ class UpdatePlacesTable extends Migration
     public function down()
     {
         Schema::table('places', function (Blueprint $table) {
-            $table->dropSpatialIndex(['location']); // either an array of column names or the index name
+            // either an array of column names or the index name
+            $table->dropSpatialIndex(['location']);
         });
 
         // \DB::statement('ALTER TABLE places ENGINE = InnoDB');
@@ -438,7 +421,8 @@ $ composer test:unit
 $ composer test:integration
 ```
 
-Integration tests require a running MySQL database. If you have Docker installed, you can start easily start one:
+Integration tests require a running MySQL database. If you have Docker
+installed, you can start easily start one:
 
 ```shell
 $ make start_db		# starts MySQL 8.0
@@ -448,9 +432,14 @@ $ make start_db V=5.7	# starts MySQL 5.7
 
 ## Contributing
 
-Recommendations and pull request are most welcome! Pull requests with tests are the best! There are still a lot of MySQL spatial functions to implement or creative ways to use spatial functions. 
+Recommendations and pull request are most welcome! Pull requests with tests are
+the best! There are still a lot of MySQL spatial functions to implement or
+creative ways to use spatial functions. 
 
 ## Credits
 
-Originally inspired from [njbarrett's Laravel postgis package](https://github.com/njbarrett/laravel-postgis).
+Originally inspired from:
+
+- [njbarrett's Laravel postgis package](https://github.com/njbarrett/laravel-postgis)
+- [grimzy's laravel-mysql-spatial package](https://github.com/grimzy/laravel-mysql-spatial)
 
