@@ -3,3 +3,4 @@ vendor/
 composer.lock
 _db/
 build/
+.DS_STORE
