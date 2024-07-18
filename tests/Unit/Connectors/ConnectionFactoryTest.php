@@ -20,7 +20,7 @@ class ConnectionFactoryTest extends BaseTestCase
 
     public function testCreateConnectionDifferentDriver()
     {
-        $pdo = new PDOStub();
+        $pdo = new PDOStub('pgsql');
 
         $factory = Mockery::mock(ConnectionFactory::class, [new Container()])->makePartial();
         $factory->shouldAllowMockingProtectedMethods();
