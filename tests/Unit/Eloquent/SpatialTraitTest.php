@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Eloquent\Model;
-use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery\MockInterface;
 use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException;
@@ -585,7 +584,7 @@ class TestPDO extends PDO
     {
         $this->queries[] = $statement;
 
-        $stmt = Mockery::mock('PDOStatement');
+        $stmt = \Mockery::mock('PDOStatement');
         $stmt->shouldReceive('bindValue')->zeroOrMoreTimes();
         $stmt->shouldReceive('execute');
         $stmt->shouldReceive('fetchAll')->andReturn([['id' => 1, 'point' => 'POINT(1 2)']]);
