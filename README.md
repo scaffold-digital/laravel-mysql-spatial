@@ -1,5 +1,6 @@
 # Laravel MySQL Spatial extension
 
+[![GitHub Action](https://github.com/scaffold-digital/laravel-mysql-spatial/actions/workflows/ci-testing.yml/badge.svg)](https://github.com/scaffold-digital/laravel-mysql-spatial/actions)
 [![Packagist](https://img.shields.io/packagist/v/scaffold-digital/laravel-mysql-spatial.svg?style=flat-square)](https://packagist.org/packages/scaffold-digital/laravel-mysql-spatial)
 [![Packagist](https://img.shields.io/packagist/dt/scaffold-digital/laravel-mysql-spatial.svg?style=flat-square)](https://packagist.org/packages/scaffold-digital/laravel-mysql-spatial)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](LICENSE)
