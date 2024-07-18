@@ -1,5 +1,5 @@
 {
-    "name": "grimzy/laravel-mysql-spatial",
+    "name": "scaffold-digital/laravel-mysql-spatial",
     "description": "MySQL spatial data types extension for Laravel.",
     "scripts": {
         "test": "phpunit -c phpunit.xml.dist",
@@ -10,12 +10,12 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Joseph Estefane",
-            "email": "estefanejoe@gmail.com"
+            "name": "Scaffold Digital",
+            "email": "enquiries@scaffold.digital"
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": "^7.0|^8.0",
         "ext-pdo": "*",
         "ext-json": "*",
         "illuminate/database": "^8.0",
@@ -23,19 +23,19 @@
         "jmikola/geojson": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.5",
+        "phpunit/phpunit": "^9.5.10",
         "laravel/laravel": "^8.0",
         "doctrine/dbal": "^2.5",
         "laravel/browser-kit-testing": "^2.0",
-        "mockery/mockery": "^1.3"
+        "mockery/mockery": "^1.4.4"
     },
     "autoload": {
         "psr-4": {
-            "Grimzy\\LaravelMysqlSpatial\\": "src/"
+            "ScaffoldDigital\\LaravelMysqlSpatial\\": "src/"
         }
     },
-    "autoload-dev" : {
-        "classmap" : [
+    "autoload-dev": {
+        "classmap": [
             "tests/Unit",
             "tests/Integration"
         ]
@@ -46,7 +46,7 @@
         },
         "laravel": {
             "providers": [
-                "Grimzy\\LaravelMysqlSpatial\\SpatialServiceProvider"
+                "ScaffoldDigital\\LaravelMysqlSpatial\\SpatialServiceProvider"
             ]
         }
     }
