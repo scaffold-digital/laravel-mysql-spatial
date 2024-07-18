@@ -206,13 +206,13 @@ class SpatialTest extends IntegrationBaseTestCase
         $loc1->save();
 
         $loc2 = new GeometryModel();
-        $loc2->location = new Point(2, 2); // Distance from loc1: 1.4142135623731
+        $loc2->location = new Point(2, 2); // Distance from loc1: 1.4142135623730951
         $loc2->save();
 
         $a = GeometryModel::distanceValue('location', $loc1->location)->get();
         $this->assertCount(2, $a);
         $this->assertEquals(0, $a[0]->distance);
-        $this->assertEquals(1.4142135623, $a[1]->distance); // PHP floats' 11th+ digits don't matter
+        $this->assertEquals(1.4142135623730951, $a[1]->distance);
     }
 
     public function testDistanceSphereValue()
@@ -222,7 +222,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $loc1->save();
 
         $loc2 = new GeometryModel();
-        $loc2->location = new Point(40.767664, -73.971271); // Distance from loc1: 44.741406484236
+        $loc2->location = new Point(40.767664, -73.971271); // Distance from loc1: 44.741406484236215
         $loc2->save();
 
         $a = GeometryModel::distanceSphereValue('location', $loc1->location)->get();
@@ -230,7 +230,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $this->assertEquals(0, $a[0]->distance);
 
         if ($this->after_fix) {
-            $this->assertEquals(44.7414064842, $a[1]->distance); // PHP floats' 11th+ digits don't matter
+            $this->assertEquals(44.741406484236215, $a[1]->distance);
         } else {
             $this->assertEquals(44.7414064845, $a[1]->distance); // PHP floats' 11th+ digits don't matter
         }
