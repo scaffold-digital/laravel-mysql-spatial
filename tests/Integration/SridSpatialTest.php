@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\GeometryCollection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint;
@@ -125,7 +126,7 @@ class SridSpatialTest extends IntegrationBaseTestCase
         $geo->location = new Point(1, 2, 3857);
         $geo->save();
 
-        $srid = \DB::selectOne('select ST_SRID(location) as srid from with_srid');
+        $srid = DB::selectOne('select ST_SRID(location) as srid from with_srid');
         $this->assertEquals(3857, $srid->srid);
 
         $result = WithSridModel::first();
