@@ -7,7 +7,7 @@ use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedExcept
 use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 
-class SpatialTraitTest extends BaseTestCase
+class SpatialTraitTest extends IntegrationBaseTestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -23,6 +23,8 @@ class SpatialTraitTest extends BaseTestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $this->model = new TestModel();
         $this->queries = &$this->model->getConnection()->getPdo()->queries;
     }
