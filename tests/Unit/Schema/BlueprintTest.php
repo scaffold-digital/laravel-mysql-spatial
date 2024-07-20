@@ -188,7 +188,7 @@ class BlueprintTest extends BaseTestCase
             ->once()
             ->andReturn($expectedCol);
 
-        $result = $this->blueprint->geometry('col', 4326);
+        $result = $this->blueprint->geometry('col', null, 4326);
 
         $this->assertSame($expectedCol, $result);
     }
