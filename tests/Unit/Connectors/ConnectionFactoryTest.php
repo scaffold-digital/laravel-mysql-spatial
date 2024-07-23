@@ -4,6 +4,7 @@ namespace Tests\Unit\Connectors;
 
 use Illuminate\Container\Container;
 use Mockery;
+use PDO;
 use ScaffoldDigital\LaravelMysqlSpatial\Connectors\ConnectionFactory;
 use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use Tests\TestCase;
@@ -12,7 +13,7 @@ class ConnectionFactoryTest extends TestCase
 {
     public function testMakeCallsCreateConnection()
     {
-        $pdo = $this->createMock(\PDO::class);
+        $pdo = new PDO('mysql:dbname=spatial_test;host=127.0.0.1', 'root', 'password');
 
         $factory = Mockery::mock(ConnectionFactory::class, [new Container()])->makePartial();
         $factory->shouldAllowMockingProtectedMethods();
