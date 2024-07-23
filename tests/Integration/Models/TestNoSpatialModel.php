@@ -5,11 +5,7 @@ namespace Tests\Integration\Models;
 use Illuminate\Database\Eloquent\Model;
 use ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 
-class NoSpatialFieldsModel extends Model
+class TestNoSpatialModel extends Model
 {
     use SpatialTrait;
-
-    protected $table = 'no_spatial_fields';
-
-    public $timestamps = false;
 }
