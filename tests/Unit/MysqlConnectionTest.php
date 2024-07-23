@@ -1,9 +1,10 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Tests\Unit\Types;
+
+use Illuminate\Database\Schema\Builder;
 use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
-use ScaffoldDigital\LaravelMysqlSpatial\Schema\Builder;
-use Stubs\PDOStub;
+use Tests\TestCase;
 
 class MysqlConnectionTest extends TestCase
 {
@@ -12,7 +13,7 @@ class MysqlConnectionTest extends TestCase
     protected function setUp(): void
     {
         $mysqlConfig = ['driver' => 'mysql', 'prefix' => 'prefix', 'database' => 'database', 'name' => 'foo'];
-        $this->mysqlConnection = new MysqlConnection(new PDOStub('mysql'), 'database', 'prefix', $mysqlConfig);
+        $this->mysqlConnection = new MysqlConnection($this->createMock(\PDO::class), 'database', 'prefix', $mysqlConfig);
     }
 
     public function testGetSchemaBuilder()

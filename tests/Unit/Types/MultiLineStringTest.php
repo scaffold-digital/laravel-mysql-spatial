@@ -1,10 +1,14 @@
 <?php
 
+namespace Tests\Unit\Types;
+
+use InvalidArgumentException;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiLineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\TestCase;
 
-class MultiLineStringTest extends BaseTestCase
+class MultiLineStringTest extends TestCase
 {
     public function testFromWKT()
     {
@@ -47,7 +51,7 @@ class MultiLineStringTest extends BaseTestCase
     {
         $this->assertException(
             \ScaffoldDigital\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
-            sprintf('Expected %s, got %s', GeoJson\Geometry\MultiLineString::class, GeoJson\Geometry\Point::class)
+            sprintf('Expected %s, got %s', \GeoJson\Geometry\MultiLineString::class, \GeoJson\Geometry\Point::class)
         );
         MultiLineString::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
     }

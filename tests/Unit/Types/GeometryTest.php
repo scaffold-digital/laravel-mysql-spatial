@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\UnknownWKTTypeException;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Geometry;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\GeometryCollection;
@@ -9,8 +11,9 @@ use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\TestCase;
 
-class GeometryTest extends BaseTestCase
+class GeometryTest extends TestCase
 {
     public function testGetWKTArgument()
     {

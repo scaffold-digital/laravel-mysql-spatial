@@ -1,15 +1,18 @@
 <?php
 
+namespace Tests\Unit\Connectors;
+
 use Illuminate\Container\Container;
+use Mockery;
 use ScaffoldDigital\LaravelMysqlSpatial\Connectors\ConnectionFactory;
 use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
-use Stubs\PDOStub;
+use Tests\TestCase;
 
-class ConnectionFactoryTest extends BaseTestCase
+class ConnectionFactoryTest extends TestCase
 {
     public function testMakeCallsCreateConnection()
     {
-        $pdo = new PDOStub();
+        $pdo = $this->createMock(\PDO::class);
 
         $factory = Mockery::mock(ConnectionFactory::class, [new Container()])->makePartial();
         $factory->shouldAllowMockingProtectedMethods();
@@ -20,7 +23,7 @@ class ConnectionFactoryTest extends BaseTestCase
 
     public function testCreateConnectionDifferentDriver()
     {
-        $pdo = new PDOStub('pgsql');
+        $pdo = $this->createMock(\PDO::class);
 
         $factory = Mockery::mock(ConnectionFactory::class, [new Container()])->makePartial();
         $factory->shouldAllowMockingProtectedMethods();
