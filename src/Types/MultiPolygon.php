@@ -24,7 +24,7 @@ class MultiPolygon extends GeometryCollection
 
     public function toWKT()
     {
-        return sprintf('MULTIPOLYGON(%s)', (string) $this);
+        return sprintf('MULTIPOLYGON((%s))', (string) $this);
     }
 
     public function __toString()
