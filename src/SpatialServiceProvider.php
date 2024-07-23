@@ -5,6 +5,7 @@ namespace ScaffoldDigital\LaravelMysqlSpatial;
 use Doctrine\DBAL\Types\Type as DoctrineType;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\DatabaseServiceProvider;
+use Illuminate\Database\Schema\Blueprint;
 use ScaffoldDigital\LaravelMysqlSpatial\Connectors\ConnectionFactory;
 use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\Geometry;
 use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\GeometryCollection;
@@ -63,6 +64,26 @@ class SpatialServiceProvider extends DatabaseServiceProvider
                     DoctrineType::addType($type, $class);
                 }
             }
+        }
+    }
+
+    public function boot()
+    {
+        $geometries = [
+            'point' => 'point',
+            'lineString' => 'linestring',
+            'polygon' => 'polygon',
+            'multiPoint' => 'multipoint',
+            'multiLineString' => 'multilinestring',
+            'multiPolygon' => 'multipolygon',
+            'multiPolygonZ' => 'multipolygonz',
+            'geometryCollection' => 'geometrycollection',
+        ];
+
+        foreach ($geometries as $functionName => $subtype) {
+            Blueprint::macro($functionName, function ($column, $srid = 0) use ($subtype) {
+                return $this->geometry(column: $column, subtype: $subtype, srid: $srid);
+            });
         }
     }
 }
