@@ -2,9 +2,9 @@
 
 namespace ScaffoldDigital\LaravelMysqlSpatial\Schema\Grammars;
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\MySqlGrammar as IlluminateMySqlGrammar;
 use Illuminate\Support\Fluent;
-use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
 
 class MySqlGrammar extends IlluminateMySqlGrammar
 {
