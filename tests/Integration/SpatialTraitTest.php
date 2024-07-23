@@ -93,8 +93,8 @@ class SpatialTraitTest extends TestCase
         $point1 = new Point(1, 2);
         $point2 = new Point(2, 3);
         $linestring1 = new \ScaffoldDigital\LaravelMysqlSpatial\Types\LineString([$point1, $point2]);
-        $point3 = new Point(3, 2);
-        $point4 = new Point(2, 1);
+        $point3 = new Point(2, 3);
+        $point4 = new Point(1, 2);
         $linestring2 = new \ScaffoldDigital\LaravelMysqlSpatial\Types\LineString([$point3, $point4]);
 
         $this->assertFalse($this->model->exists);
@@ -169,7 +169,7 @@ class SpatialTraitTest extends TestCase
         $point2 = new Point(2, 3);
         $linestring1 = new \ScaffoldDigital\LaravelMysqlSpatial\Types\LineString([$point1, $point2]);
         $point3 = new Point(3, 2);
-        $point4 = new Point(2, 1);
+        $point4 = new Point(1, 2);
         $linestring2 = new \ScaffoldDigital\LaravelMysqlSpatial\Types\LineString([$point3, $point4]);
         $polygon1 = new \ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon([$linestring1, $linestring2]);
 
@@ -177,7 +177,7 @@ class SpatialTraitTest extends TestCase
         $point6 = new Point(5, 6);
         $linestring3 = new \ScaffoldDigital\LaravelMysqlSpatial\Types\LineString([$point5, $point6]);
         $point7 = new Point(6, 5);
-        $point8 = new Point(5, 4);
+        $point8 = new Point(4, 5);
         $linestring4 = new \ScaffoldDigital\LaravelMysqlSpatial\Types\LineString([$point7, $point8]);
         $polygon2 = new \ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon([$linestring3, $linestring4]);
 
@@ -393,7 +393,7 @@ class SpatialTraitTest extends TestCase
         $bindings = $q->getRawBindings()['where'];
         $this->assertNotEmpty($bindings);
         $this->assertEquals('st_within(`point`, ST_GeomFromText(?, ?, \'axis-order=long-lat\'))', $q->wheres[0]['sql']);
-        $this->assertEquals('POLYGON((1 1,2 1),(2 1,2 2),(2 2,1 1))', $bindings[0]);
+        $this->assertEquals('POLYGON((1 1,2 1,2 1,2 2,2 2,1 1))', $bindings[0]);
     }
 
     public function testScopeWithin()
@@ -406,7 +406,7 @@ class SpatialTraitTest extends TestCase
         $bindings = $q->getRawBindings()['where'];
         $this->assertNotEmpty($bindings);
         $this->assertEquals('st_within(`point`, ST_GeomFromText(?, ?, \'axis-order=long-lat\'))', $q->wheres[0]['sql']);
-        $this->assertEquals('POLYGON((1 1,2 1),(2 1,2 2),(2 2,1 1))', $bindings[0]);
+        $this->assertEquals('POLYGON((1 1,2 1,2 1,2 2,2 2,1 1))', $bindings[0]);
     }
 
     public function testScopeCrosses()
@@ -419,7 +419,7 @@ class SpatialTraitTest extends TestCase
         $bindings = $q->getRawBindings()['where'];
         $this->assertNotEmpty($bindings);
         $this->assertEquals('st_crosses(`point`, ST_GeomFromText(?, ?, \'axis-order=long-lat\'))', $q->wheres[0]['sql']);
-        $this->assertEquals('POLYGON((1 1,2 1),(2 1,2 2),(2 2,1 1))', $bindings[0]);
+        $this->assertEquals('POLYGON((1 1,2 1,2 1,2 2,2 2,1 1))', $bindings[0]);
     }
 
     public function testScopeContains()
@@ -432,7 +432,7 @@ class SpatialTraitTest extends TestCase
         $bindings = $q->getRawBindings()['where'];
         $this->assertNotEmpty($bindings);
         $this->assertEquals('st_contains(`point`, ST_GeomFromText(?, ?, \'axis-order=long-lat\'))', $q->wheres[0]['sql']);
-        $this->assertEquals('POLYGON((1 1,2 1),(2 1,2 2),(2 2,1 1))', $bindings[0]);
+        $this->assertEquals('POLYGON((1 1,2 1,2 1,2 2,2 2,1 1))', $bindings[0]);
     }
 
     public function testScopeDisjoint()
@@ -445,7 +445,7 @@ class SpatialTraitTest extends TestCase
         $bindings = $q->getRawBindings()['where'];
         $this->assertNotEmpty($bindings);
         $this->assertEquals('st_disjoint(`point`, ST_GeomFromText(?, ?, \'axis-order=long-lat\'))', $q->wheres[0]['sql']);
-        $this->assertEquals('POLYGON((1 1,2 1),(2 1,2 2),(2 2,1 1))', $bindings[0]);
+        $this->assertEquals('POLYGON((1 1,2 1,2 1,2 2,2 2,1 1))', $bindings[0]);
     }
 
     public function testScopeEquals()
@@ -458,7 +458,7 @@ class SpatialTraitTest extends TestCase
         $bindings = $q->getRawBindings()['where'];
         $this->assertNotEmpty($bindings);
         $this->assertEquals('st_equals(`point`, ST_GeomFromText(?, ?, \'axis-order=long-lat\'))', $q->wheres[0]['sql']);
-        $this->assertEquals('POLYGON((1 1,2 1),(2 1,2 2),(2 2,1 1))', $bindings[0]);
+        $this->assertEquals('POLYGON((1 1,2 1,2 1,2 2,2 2,1 1))', $bindings[0]);
     }
 
     public function testScopeIntersects()
@@ -471,7 +471,7 @@ class SpatialTraitTest extends TestCase
         $bindings = $q->getRawBindings()['where'];
         $this->assertNotEmpty($bindings);
         $this->assertEquals('st_intersects(`point`, ST_GeomFromText(?, ?, \'axis-order=long-lat\'))', $q->wheres[0]['sql']);
-        $this->assertEquals('POLYGON((1 1,2 1),(2 1,2 2),(2 2,1 1))', $bindings[0]);
+        $this->assertEquals('POLYGON((1 1,2 1,2 1,2 2,2 2,1 1))', $bindings[0]);
     }
 
     public function testScopeOverlaps()
@@ -484,7 +484,7 @@ class SpatialTraitTest extends TestCase
         $bindings = $q->getRawBindings()['where'];
         $this->assertNotEmpty($bindings);
         $this->assertEquals('st_overlaps(`point`, ST_GeomFromText(?, ?, \'axis-order=long-lat\'))', $q->wheres[0]['sql']);
-        $this->assertEquals('POLYGON((1 1,2 1),(2 1,2 2),(2 2,1 1))', $bindings[0]);
+        $this->assertEquals('POLYGON((1 1,2 1,2 1,2 2,2 2,1 1))', $bindings[0]);
     }
 
     public function testScopeDoesTouch()
@@ -497,7 +497,7 @@ class SpatialTraitTest extends TestCase
         $bindings = $q->getRawBindings()['where'];
         $this->assertNotEmpty($bindings);
         $this->assertEquals('st_touches(`point`, ST_GeomFromText(?, ?, \'axis-order=long-lat\'))', $q->wheres[0]['sql']);
-        $this->assertEquals('POLYGON((1 1,2 1),(2 1,2 2),(2 2,1 1))', $bindings[0]);
+        $this->assertEquals('POLYGON((1 1,2 1,2 1,2 2,2 2,1 1))', $bindings[0]);
     }
 
     public function testScopeOrderBySpatialThrowsExceptionWhenFunctionNotRegistered()
