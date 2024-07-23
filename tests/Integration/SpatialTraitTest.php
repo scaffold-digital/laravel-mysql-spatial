@@ -1,37 +1,48 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
+namespace Tests\Integration;
+
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException;
-use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\Integration\Migrations\CreateTables;
+use Tests\Integration\Migrations\UpdateTables;
+use Tests\Integration\Models\TestModel;
+use Tests\Integration\Models\TestNoSpatialModel;
+use Tests\TestCase;
 
-class SpatialTraitTest extends IntegrationBaseTestCase
+class SpatialTraitTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    /**
-     * @var TestModel
-     */
-    protected $model;
+    protected TestModel $model;
 
-    /**
-     * @var array
-     */
-    protected $queries;
+    protected array $queries;
 
     public function setUp(): void
     {
         parent::setUp();
 
+        (new CreateTables)->up();
+        (new UpdateTables)->up();
+
         $this->model = new TestModel();
-        $this->queries = &$this->model->getConnection()->getPdo()->queries;
+
+        DB::listen(function (QueryExecuted $query) {
+            $this->queries[] = $query->sql;
+        });
     }
 
     public function tearDown(): void
     {
-        $this->model->getConnection()->getPdo()->resetQueries();
+        (new UpdateTables)->down();
+        (new CreateTables)->down();
+
+        parent::tearDown();
+
+        $this->queries = [];
     }
 
     public function testInsertUpdatePointHasCorrectSql()
@@ -525,83 +536,5 @@ class SpatialTraitTest extends IntegrationBaseTestCase
         $this->assertNotEmpty($bindings);
         $this->assertEquals('st_distance_sphere(`point`, ST_GeomFromText(?, ?, \'axis-order=long-lat\')) asc', $q->orders[0]['sql']);
         $this->assertEquals('POINT(2 1)', $bindings[0]);
-    }
-}
-
-class TestModel extends Model
-{
-    use \ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialTrait;
-
-    protected $spatialFields = ['point'];   // TODO: only required when fetching, not saving
-
-    public $timestamps = false;
-
-    public static $pdo;
-
-    public static function resolveConnection($connection = null)
-    {
-        if (is_null(static::$pdo)) {
-            static::$pdo = new TestPDO('mysql:dbname=spatial_test;host=127.0.0.1', 'root', 'password');
-        }
-
-        return new MysqlConnection(static::$pdo);
-    }
-
-    public function testrelatedmodels()
-    {
-        return $this->hasMany(TestRelatedModel::class);
-    }
-
-    public function testrelatedmodels2()
-    {
-        return $this->belongsToMany(TestRelatedModel::class);
-    }
-}
-
-class TestRelatedModel extends TestModel
-{
-    public function testmodel()
-    {
-        return $this->belongsTo(TestModel::class);
-    }
-
-    public function testmodels()
-    {
-        return $this->belongsToMany(TestModel::class);
-    }
-}
-
-class TestNoSpatialModel extends Model
-{
-    use \ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialTrait;
-}
-
-class TestPDO extends PDO
-{
-    public $queries = [];
-
-    public $counter = 1;
-
-    public function prepare($statement, $driver_options = []): PDOStatement | false
-    {
-        $this->queries[] = $statement;
-
-        $stmt = \Mockery::mock('PDOStatement');
-        $stmt->shouldReceive('bindValue')->zeroOrMoreTimes();
-        $stmt->shouldReceive('execute');
-        $stmt->shouldReceive('fetchAll')->andReturn([['id' => 1, 'point' => 'POINT(1 2)']]);
-        $stmt->shouldReceive('rowCount')->andReturn(1);
-
-        return $stmt;
-    }
-
-    public function lastInsertId($name = null): string | false
-    {
-        return $this->counter++;
-    }
-
-    public function resetQueries()
-    {
-        $this->queries = [];
     }
 }

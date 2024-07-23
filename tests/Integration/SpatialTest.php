@@ -1,18 +1,37 @@
 <?php
 
+namespace Tests\Integration;
+
+use Illuminate\Support\Facades\DB;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\GeometryCollection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\Integration\Migrations\CreateTables;
+use Tests\Integration\Migrations\UpdateTables;
+use Tests\Integration\Models\GeometryModel;
+use Tests\Integration\Models\NoSpatialFieldsModel;
+use Tests\TestCase;
 
-class SpatialTest extends IntegrationBaseTestCase
+class SpatialTest extends TestCase
 {
-    protected $migrations = [
-        CreateLocationTable::class,
-        UpdateLocationTable::class,
-    ];
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        (new CreateTables)->up();
+        (new UpdateTables)->up();
+    }
+
+    public function tearDown(): void
+    {
+        (new UpdateTables)->down();
+        (new CreateTables)->down();
+
+        parent::tearDown();
+    }
 
     public function testSpatialFieldsNotDefinedException()
     {
@@ -188,7 +207,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $this->assertTrue($b->contains('location', $loc2->location));
         $this->assertFalse($b->contains('location', $loc3->location));
 
-        if ($this->after_fix) {
+        if ($this->isMySQL8AfterFix()) {
             $c = GeometryModel::distanceSphere('location', $loc1->location, 44.741406484236)->get();
         } else {
             $c = GeometryModel::distanceSphere('location', $loc1->location, 44.741406484587)->get();
@@ -229,7 +248,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $this->assertCount(2, $a);
         $this->assertEquals(0, $a[0]->distance);
 
-        if ($this->after_fix) {
+        if ($this->isMySQL8AfterFix()) {
             $this->assertEquals(44.741406484236215, $a[1]->distance);
         } else {
             $this->assertEquals(44.7414064845, $a[1]->distance); // PHP floats' 11th+ digits don't matter
@@ -312,35 +331,11 @@ class SpatialTest extends IntegrationBaseTestCase
         $this->assertEquals($loc1->location, $c[2]->location);
     }
 
-    //public function testBounding() {
-    //    $point = new Point(0, 0);
-    //
-    //    $linestring1 = \ScaffoldDigital\LaravelMysqlSpatial\Types\LineString::fromWkt("LINESTRING(1 1, 2 2)");
-    //    $linestring2 = \ScaffoldDigital\LaravelMysqlSpatial\Types\LineString::fromWkt("LINESTRING(20 20, 24 24)");
-    //    $linestring3 = \ScaffoldDigital\LaravelMysqlSpatial\Types\LineString::fromWkt("LINESTRING(0 10, 10 10)");
-    //
-    //    $geo1 = new GeometryModel();
-    //    $geo1->location = $point;
-    //    $geo1->line = $linestring1;
-    //    $geo1->save();
-    //
-    //    $geo2 = new GeometryModel();
-    //    $geo2->location = $point;
-    //    $geo2->line = $linestring2;
-    //    $geo2->save();
-    //
-    //    $geo3 = new GeometryModel();
-    //    $geo3->location = $point;
-    //    $geo3->line = $linestring3;
-    //    $geo3->save();
-    //
-    //    $polygon = Polygon::fromWKT("POLYGON((0 10,10 10,10 0,0 0,0 10))");
-    //
-    //    $result = GeometryModel::Bounding($polygon, 'line')->get();
-    //    $this->assertCount(2, $result);
-    //    $this->assertTrue($result->contains($geo1));
-    //    $this->assertFalse($result->contains($geo2));
-    //    $this->assertTrue($result->contains($geo3));
-    //
-    //}
+    private function isMySQL8AfterFix(): bool
+    {
+        $results = DB::select(DB::raw('select version()')->getValue(DB::connection()->getQueryGrammar()));
+        $mysql_version = $results[0]->{'version()'};
+
+        return version_compare($mysql_version, '8.0.4', '>=');
+    }
 }

@@ -1,15 +1,31 @@
 <?php
 
+namespace Tests\Integration;
+
 use Illuminate\Support\Facades\DB;
+use Tests\Integration\Migrations\CreateTables;
+use Tests\Integration\Migrations\UpdateTables;
+use Tests\TestCase;
 
-class MigrationTest extends IntegrationBaseTestCase
+class MigrationTest extends TestCase
 {
-    protected $migrations = [
-        CreateLocationTable::class,
-        UpdateLocationTable::class,
-    ];
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-    public function testTableWasCreatedWithRightTypes()
+        (new CreateTables)->up();
+        (new UpdateTables)->up();
+    }
+
+    public function tearDown(): void
+    {
+        (new UpdateTables)->down();
+        (new CreateTables)->down();
+
+        parent::tearDown();
+    }
+
+    public function testTableWasCreatedWithRightTypes(): void
     {
         $result = DB::selectOne('SHOW CREATE TABLE geometry');
 
@@ -26,14 +42,14 @@ class MigrationTest extends IntegrationBaseTestCase
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  SPATIAL KEY `geometry_location_spatial` (`location`)
+  SPATIAL KEY `geometry_location_spatialindex` (`location`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci';
 
         $this->assertEquals('geometry', $result->Table);
         $this->assertEquals($expected, $result->{'Create Table'});
     }
 
-    public function testTableWasCreatedWithSrid()
+    public function testTableWasCreatedWithSrid(): void
     {
         $result = DB::selectOne('SHOW CREATE TABLE with_srid');
 
