@@ -3,7 +3,7 @@
 namespace Tests\Unit\Types;
 
 use Illuminate\Database\Schema\Builder;
-use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
+use Illuminate\Database\MySqlConnection;
 use Tests\TestCase;
 
 class MysqlConnectionTest extends TestCase

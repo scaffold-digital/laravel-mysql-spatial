@@ -3,13 +3,13 @@
 namespace Tests\Unit\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\MySqlConnection;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Mockery;
 use ScaffoldDigital\LaravelMysqlSpatial\Eloquent\Builder;
 use ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialExpression;
 use ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialTrait;
-use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;

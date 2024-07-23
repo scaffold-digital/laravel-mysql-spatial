@@ -4,7 +4,7 @@ namespace Tests\Unit\Schema;
 
 use Illuminate\Database\Schema\Blueprint;
 use Mockery;
-use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
+use Illuminate\Database\MySqlConnection;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Builder;
 use Tests\TestCase;
 

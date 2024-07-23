@@ -3,10 +3,10 @@
 namespace Tests\Unit\Connectors;
 
 use Illuminate\Container\Container;
+use Illuminate\Database\MySqlConnection;
 use Mockery;
 use PDO;
 use ScaffoldDigital\LaravelMysqlSpatial\Connectors\ConnectionFactory;
-use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use Tests\TestCase;
 
 class ConnectionFactoryTest extends TestCase
