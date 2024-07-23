@@ -10,7 +10,7 @@ class Polygon extends MultiLineString
 {
     public function toWKT()
     {
-        return sprintf('POLYGON(%s)', (string) $this);
+        return sprintf('POLYGON((%s))', (string) $this);
     }
 
     public static function fromJson($geoJson)
@@ -33,6 +33,13 @@ class Polygon extends MultiLineString
         }
 
         return new self($set);
+    }
+
+    public function __toString(): string
+    {
+        return implode(',', array_map(function (LineString $lineString) {
+            return sprintf('%s', (string) $lineString);
+        }, $this->getLineStrings()));
     }
 
     /**
