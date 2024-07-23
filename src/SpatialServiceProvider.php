@@ -2,19 +2,10 @@
 
 namespace ScaffoldDigital\LaravelMysqlSpatial;
 
-use Doctrine\DBAL\Types\Type as DoctrineType;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\DatabaseServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
 use ScaffoldDigital\LaravelMysqlSpatial\Connectors\ConnectionFactory;
-use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\Geometry;
-use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\GeometryCollection;
-use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\LineString;
-use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\MultiLineString;
-use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\MultiPoint;
-use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\MultiPolygon;
-use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\Point;
-use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\Polygon;
 
 /**
  * Class DatabaseServiceProvider.
@@ -45,26 +36,6 @@ class SpatialServiceProvider extends DatabaseServiceProvider
         $this->app->singleton('db.schema', function ($app) {
             return $app['db']->connection()->getSchemaBuilder();
         });
-
-        if (class_exists(DoctrineType::class)) {
-            // Prevent geometry type fields from throwing a 'type not found' error when changing them
-            $geometries = [
-                'geometry'           => Geometry::class,
-                'point'              => Point::class,
-                'linestring'         => LineString::class,
-                'polygon'            => Polygon::class,
-                'multipoint'         => MultiPoint::class,
-                'multilinestring'    => MultiLineString::class,
-                'multipolygon'       => MultiPolygon::class,
-                'geometrycollection' => GeometryCollection::class,
-            ];
-            $typeNames = array_keys(DoctrineType::getTypesMap());
-            foreach ($geometries as $type => $class) {
-                if (!in_array($type, $typeNames)) {
-                    DoctrineType::addType($type, $class);
-                }
-            }
-        }
     }
 
     public function boot()
