@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocationTable extends Migration
+class CreateTables extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,20 @@ class CreateLocationTable extends Migration
      */
     public function up()
     {
+        Schema::create('test_models', function (Blueprint $table) {
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+            $table->increments('id');
+            $table->geometryCollection('geometrycollection')->default(null)->nullable();
+            $table->lineString('linestring')->default(null)->nullable();
+            $table->multiLineString('multilinestring')->default(null)->nullable();
+            $table->multiPoint('multipoint')->default(null)->nullable();
+            $table->multiPolygon('multipolygon')->default(null)->nullable();
+            $table->point('point')->default(null)->nullable();
+            $table->polygon('polygon')->default(null)->nullable();
+            $table->timestamps();
+        });
+
         Schema::create('geometry', function (Blueprint $table) {
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
@@ -57,6 +71,7 @@ class CreateLocationTable extends Migration
      */
     public function down()
     {
+        Schema::drop('test_models');
         Schema::drop('geometry');
         Schema::drop('no_spatial_fields');
         Schema::drop('with_srid');
