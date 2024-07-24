@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
 
@@ -14,7 +15,7 @@ class UpdateLocationTable extends Migration
     public function up()
     {
         // MySQL < 5.7.5: table has to be MyISAM
-        \DB::statement('ALTER TABLE geometry ENGINE = MyISAM');
+        DB::statement('ALTER TABLE geometry ENGINE = MyISAM');
 
         Schema::table('geometry', function (Blueprint $table) {
             // Make sure point is not nullable
@@ -45,7 +46,7 @@ class UpdateLocationTable extends Migration
             $table->dropSpatialIndex(['location']); // either an array of column names or the index name
         });
 
-        \DB::statement('ALTER TABLE geometry ENGINE = InnoDB');
+        DB::statement('ALTER TABLE geometry ENGINE = InnoDB');
 
         Schema::table('geometry', function (Blueprint $table) {
             $table->point('location')->nullable()->change();

@@ -79,22 +79,14 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
 
     protected function assertDatabaseHas($table, array $data, $connection = null)
     {
-        if (method_exists($this, 'seeInDatabase')) {
-            $this->seeInDatabase($table, $data, $connection);
-        } else {
-            parent::assertDatabaseHas($table, $data, $connection);
-        }
+        $this->seeInDatabase($table, $data, $connection);
     }
 
     protected function assertException($exceptionName, $exceptionMessage = null)
     {
-        if (method_exists(parent::class, 'expectException')) {
-            parent::expectException($exceptionName);
-            if (!is_null($exceptionMessage)) {
-                $this->expectExceptionMessage($exceptionMessage);
-            }
-        } else {
-            $this->setExpectedException($exceptionName, $exceptionMessage);
+        parent::expectException($exceptionName);
+        if (!is_null($exceptionMessage)) {
+            $this->expectExceptionMessage($exceptionMessage);
         }
     }
 
