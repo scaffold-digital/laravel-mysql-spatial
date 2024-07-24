@@ -26,7 +26,6 @@
         "phpunit/phpunit": "^11.0.1",
         "laravel/laravel": "^11.0",
         "doctrine/dbal": "^4.0",
-        "laravel/browser-kit-testing": "^7.2",
         "mockery/mockery": "^1.6",
         "orchestra/testbench": "^9.2"
     },
