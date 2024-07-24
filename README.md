@@ -16,6 +16,7 @@ Spatial Data was added in MySQL 5.5 but many Spatial Functions were changed in
 
 - `5.x.x`: MySQL 5.7 and 8.0 (Laravel 8)
 - `6.x.x`: MySQL 8.0 (Laravel 9)
+- `7.x.x`: MySQL 8.0 (Laravel 10)
 
 This package also works with MariaDB. Please refer to the [MySQL/MariaDB Spatial Support Matrix](https://mariadb.com/kb/en/library/mysqlmariadb-spatial-support-matrix/) for compatibility.
 
@@ -24,7 +25,7 @@ This package also works with MariaDB. Please refer to the [MySQL/MariaDB Spatial
 Add the package using composer:
 
 ```sh
-$ composer require scaffold-digital/laravel-mysql-spatial:^6.0
+$ composer require scaffold-digital/laravel-mysql-spatial:^7.0
 ```
 
 ## Quick start
