@@ -17,6 +17,7 @@ Spatial Data was added in MySQL 5.5 but many Spatial Functions were changed in
 - `5.x.x`: MySQL 5.7 and 8.0 (Laravel 8)
 - `6.x.x`: MySQL 8.0 (Laravel 9)
 - `7.x.x`: MySQL 8.0 (Laravel 10)
+- `8.x.x`: MySQL 8.0 (Laravel 11)
 
 This package also works with MariaDB. Please refer to the [MySQL/MariaDB Spatial Support Matrix](https://mariadb.com/kb/en/library/mysqlmariadb-spatial-support-matrix/) for compatibility.
 
@@ -25,7 +26,7 @@ This package also works with MariaDB. Please refer to the [MySQL/MariaDB Spatial
 Add the package using composer:
 
 ```sh
-$ composer require scaffold-digital/laravel-mysql-spatial:^7.0
+$ composer require scaffold-digital/laravel-mysql-spatial:^8.0
 ```
 
 ## Quick start
@@ -331,7 +332,7 @@ in each MySQL version (cf. [documentation](https://dev.mysql.com/doc/refman/8.0/
 
 Available [MySQL Spatial Types](https://dev.mysql.com/doc/refman/8.0/en/spatial-type-overview.html) migration blueprints:
 
-- `$table->geometry(string $column_name, int $srid = 0)`
+- `$table->geometry(string $column_name, ?string $subtype = null, int $srid = 0)`
 - `$table->point(string $column_name, int $srid = 0)`
 - `$table->lineString(string $column_name, int $srid = 0)`
 - `$table->polygon(string $column_name, int $srid = 0)`

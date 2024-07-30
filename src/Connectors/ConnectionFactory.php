@@ -3,8 +3,8 @@
 namespace ScaffoldDigital\LaravelMysqlSpatial\Connectors;
 
 use Illuminate\Database\Connectors\ConnectionFactory as IlluminateConnectionFactory;
+use Illuminate\Database\MySqlConnection;
 use PDO;
-use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 
 class ConnectionFactory extends IlluminateConnectionFactory
 {

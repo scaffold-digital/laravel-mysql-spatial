@@ -1,11 +1,15 @@
 <?php
 
+namespace Tests\Unit\Types;
+
+use InvalidArgumentException;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\TestCase;
 
-class MultiPolygonTest extends BaseTestCase
+class MultiPolygonTest extends TestCase
 {
     public function testFromWKT()
     {
@@ -19,12 +23,12 @@ class MultiPolygonTest extends BaseTestCase
 
         $this->assertEquals(2, $polygon->count());
 
-        $this->assertEquals('MULTIPOLYGON(((30 20,45 40,10 40,30 20)),((15 5,40 10,10 20,5 10,15 5)))', $polygon->toWKT());
+        $this->assertEquals('MULTIPOLYGON(((30 20,45 40,10 40,30 20),(15 5,40 10,10 20,5 10,15 5)))', $polygon->toWKT());
     }
 
     public function testToWKT()
     {
-        $this->assertEquals('MULTIPOLYGON(((0 0,1 0,1 1,0 1,0 0),(10 10,20 10,20 20,10 20,10 10)),((100 100,200 100,200 200,100 200,100 100)))', $this->getMultiPolygon()->toWKT());
+        $this->assertEquals('MULTIPOLYGON(((0 0,1 0,1 1,0 1,0 0,10 10,20 10,20 20,10 20,10 10),(100 100,200 100,200 200,100 200,100 100)))', $this->getMultiPolygon()->toWKT());
     }
 
     public function testGetPolygons()
@@ -67,7 +71,7 @@ class MultiPolygonTest extends BaseTestCase
     {
         $this->assertException(
             \ScaffoldDigital\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
-            sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPolygon::class, GeoJson\Geometry\Point::class)
+            sprintf('Expected %s, got %s', \GeoJson\Geometry\MultiPolygon::class, \GeoJson\Geometry\Point::class)
         );
         MultiPolygon::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
     }
