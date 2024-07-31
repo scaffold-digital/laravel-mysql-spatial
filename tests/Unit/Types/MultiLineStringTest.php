@@ -6,8 +6,9 @@ use InvalidArgumentException;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiLineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\TestCase;
 
-class MultiLineStringTest extends BaseTestCase
+class MultiLineStringTest extends TestCase
 {
     public function testFromWKT()
     {

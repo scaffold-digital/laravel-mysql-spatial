@@ -6,8 +6,9 @@ use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\TestCase;
 
-class MultiPolygonTest extends BaseTestCase
+class MultiPolygonTest extends TestCase
 {
     public function testFromWKT()
     {

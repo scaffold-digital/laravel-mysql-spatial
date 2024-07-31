@@ -11,8 +11,9 @@ use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\TestCase;
 
-class GeometryTest extends BaseTestCase
+class GeometryTest extends TestCase
 {
     public function testGetWKTArgument()
     {

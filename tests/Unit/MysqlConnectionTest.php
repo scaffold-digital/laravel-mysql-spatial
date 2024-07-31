@@ -1,8 +1,8 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Builder;
+use Tests\TestCase;
 use Tests\Unit\Stubs\PDOStub;
 
 class MysqlConnectionTest extends TestCase

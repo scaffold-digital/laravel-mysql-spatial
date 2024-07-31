@@ -2,13 +2,13 @@
 
 namespace Tests\Unit\Schema;
 
-use BaseTestCase;
 use Mockery;
 use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Builder;
+use Tests\TestCase;
 
-class BuilderTest extends BaseTestCase
+class BuilderTest extends TestCase
 {
     public function testReturnsCorrectBlueprint()
     {

@@ -4,12 +4,12 @@ namespace Tests\Unit\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use Mockery\MockInterface;
 use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException;
 use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\TestCase;
 
-class SpatialTraitTest extends BaseTestCase
+class SpatialTraitTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -576,13 +576,13 @@ class TestNoSpatialModel extends Model
     use \ScaffoldDigital\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 }
 
-class TestPDO extends PDO
+class TestPDO extends \PDO
 {
     public $queries = [];
 
     public $counter = 1;
 
-    public function prepare($statement, $driver_options = []): PDOStatement | false
+    public function prepare($statement, $driver_options = []): \PDOStatement | false
     {
         $this->queries[] = $statement;
 

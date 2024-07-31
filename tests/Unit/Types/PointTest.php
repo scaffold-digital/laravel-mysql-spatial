@@ -3,8 +3,9 @@
 namespace Tests\Unit\Types;
 
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\TestCase;
 
-class PointTest extends BaseTestCase
+class PointTest extends TestCase
 {
     public function testFromWKT()
     {

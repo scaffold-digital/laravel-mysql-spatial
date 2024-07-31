@@ -4,8 +4,9 @@ namespace Tests\Unit\Schema\Grammars;
 
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Grammars\MySqlGrammar;
+use Tests\TestCase;
 
-class MySqlGrammarTest extends BaseTestCase
+class MySqlGrammarTest extends TestCase
 {
     public function testAddingGeometry()
     {
@@ -185,14 +186,6 @@ class MySqlGrammarTest extends BaseTestCase
         $this->assertEquals(5, count($dropStatements));
         $this->assertEquals($expectedSql, $dropStatements[3]);
         $this->assertEquals($expectedSql, $dropStatements[4]);
-    }
-
-    /**
-     * @return Connection
-     */
-    protected function getConnection()
-    {
-        return Mockery::mock(MysqlConnection::class);
     }
 
     protected function getGrammar()

@@ -4,8 +4,9 @@ namespace Tests\Unit\Types;
 
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\TestCase;
 
-class LineStringTest extends BaseTestCase
+class LineStringTest extends TestCase
 {
     private $points;
 

@@ -2,6 +2,7 @@
 
 namespace Tests\Integration;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\GeometryCollection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
@@ -9,13 +10,28 @@ use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\Integration\Migrations\CreateTables;
+use Tests\Integration\Migrations\UpdateTables;
+use Tests\Integration\Models\WithSridModel;
+use Tests\TestCase;
 
-class SridSpatialTest extends IntegrationBaseTestCase
+class SridSpatialTest extends TestCase
 {
-    protected $migrations = [
-        CreateLocationTable::class,
-        UpdateLocationTable::class,
-    ];
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        (new CreateTables)->up();
+        (new UpdateTables)->up();
+    }
+
+    public function tearDown(): void
+    {
+        (new UpdateTables)->down();
+        (new CreateTables)->down();
+
+        parent::tearDown();
+    }
 
     public function testInsertPointWithSrid()
     {
@@ -111,7 +127,7 @@ class SridSpatialTest extends IntegrationBaseTestCase
         $geo->location = new Point(1, 2);
 
         $this->assertException(
-            Illuminate\Database\QueryException::class,
+            QueryException::class,
             'SQLSTATE[HY000]: General error: 3643 The SRID of the geometry ' .
                 'does not match the SRID of the column \'location\'. The SRID ' .
                 'of the geometry is 0, but the SRID of the column is 3857. ' .

@@ -8,8 +8,9 @@ use ScaffoldDigital\LaravelMysqlSpatial\Types\GeometryInterface;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\TestCase;
 
-class GeometryCollectionTest extends BaseTestCase
+class GeometryCollectionTest extends TestCase
 {
     public function testFromWKT()
     {

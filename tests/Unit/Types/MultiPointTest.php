@@ -5,8 +5,9 @@ namespace Tests\Unit\Types;
 use InvalidArgumentException;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\TestCase;
 
-class MultiPointTest extends BaseTestCase
+class MultiPointTest extends TestCase
 {
     public function testFromWKT()
     {
