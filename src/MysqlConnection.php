@@ -4,6 +4,7 @@ namespace ScaffoldDigital\LaravelMysqlSpatial;
 
 use Doctrine\DBAL\Types\Type as DoctrineType;
 use Illuminate\Database\MySqlConnection as IlluminateMySqlConnection;
+use Illuminate\Support\Facades\DB;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Builder;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Grammars\MySqlGrammar;
 
@@ -13,23 +14,27 @@ class MysqlConnection extends IlluminateMySqlConnection
     {
         parent::__construct($pdo, $database, $tablePrefix, $config);
 
-        if (class_exists(DoctrineType::class)) {
-            // Prevent geometry type fields from throwing a 'type not found' error when changing them
-            $geometries = [
-                'geometry',
-                'point',
-                'linestring',
-                'polygon',
-                'multipoint',
-                'multilinestring',
-                'multipolygon',
-                'geometrycollection',
-                'geomcollection',
-            ];
-            $dbPlatform = $this->getDoctrineSchemaManager()->getDatabasePlatform();
-            foreach ($geometries as $type) {
-                $dbPlatform->registerDoctrineTypeMapping($type, 'string');
+        try {
+            if (class_exists(DoctrineType::class) && DB::connection()->getPdo()) {
+                // Prevent geometry type fields from throwing a 'type not found' error when changing them
+                $geometries = [
+                    'geometry',
+                    'point',
+                    'linestring',
+                    'polygon',
+                    'multipoint',
+                    'multilinestring',
+                    'multipolygon',
+                    'geometrycollection',
+                    'geomcollection',
+                ];
+                $dbPlatform = $this->getDoctrineSchemaManager()->getDatabasePlatform();
+                foreach ($geometries as $type) {
+                    $dbPlatform->registerDoctrineTypeMapping($type, 'string');
+                }
             }
+        } catch (\Exception $e) {
+            // no db connection
         }
     }
 
