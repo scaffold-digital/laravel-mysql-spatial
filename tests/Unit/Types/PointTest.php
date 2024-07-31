@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 
 class PointTest extends BaseTestCase

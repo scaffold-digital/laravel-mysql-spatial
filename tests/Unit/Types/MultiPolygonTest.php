@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
@@ -67,7 +69,7 @@ class MultiPolygonTest extends BaseTestCase
     {
         $this->assertException(
             \ScaffoldDigital\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
-            sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPolygon::class, GeoJson\Geometry\Point::class)
+            sprintf('Expected %s, got %s', \GeoJson\Geometry\MultiPolygon::class, \GeoJson\Geometry\Point::class)
         );
         MultiPolygon::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
     }
@@ -81,7 +83,7 @@ class MultiPolygonTest extends BaseTestCase
     public function testInvalidArgumentExceptionAtLeastOneEntry()
     {
         $this->assertException(
-            InvalidArgumentException::class,
+            \InvalidArgumentException::class,
             'ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon must contain at least 1 entry'
         );
         $multipolygon = new MultiPolygon([]);
@@ -90,7 +92,7 @@ class MultiPolygonTest extends BaseTestCase
     public function testInvalidArgumentExceptionNotArrayOfPolygon()
     {
         $this->assertException(
-            InvalidArgumentException::class,
+            \InvalidArgumentException::class,
             'ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon must be a collection of ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon'
         );
         $multipolygon = new MultiPolygon([
@@ -117,7 +119,7 @@ class MultiPolygonTest extends BaseTestCase
 
         // assert invalid
         $this->assertException(
-            InvalidArgumentException::class,
+            \InvalidArgumentException::class,
             'ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon must be a collection of ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon'
         );
         $multipolygon[] = 1;

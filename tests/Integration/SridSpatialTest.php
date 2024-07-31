@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Integration;
+
 use Illuminate\Support\Facades\DB;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\GeometryCollection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;

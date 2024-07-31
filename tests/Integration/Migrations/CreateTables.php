@@ -1,10 +1,12 @@
 <?php
 
+namespace Tests\Integration\Migrations;
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
 
-class CreateLocationTable extends Migration
+class CreateTables extends Migration
 {
     /**
      * Run the migrations.

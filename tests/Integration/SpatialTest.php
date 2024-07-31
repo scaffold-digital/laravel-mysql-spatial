@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Integration;
+
 use ScaffoldDigital\LaravelMysqlSpatial\Types\GeometryCollection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint;

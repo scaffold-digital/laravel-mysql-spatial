@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Connectors;
+
 use Illuminate\Container\Container;
 use ScaffoldDigital\LaravelMysqlSpatial\Connectors\ConnectionFactory;
 use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;

@@ -1,6 +1,7 @@
 <?php
 
-use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
+namespace Tests\Unit\Schema\Grammars;
+
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Grammars\MySqlGrammar;
 

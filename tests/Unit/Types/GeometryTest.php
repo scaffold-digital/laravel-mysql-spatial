@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\UnknownWKTTypeException;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Geometry;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\GeometryCollection;

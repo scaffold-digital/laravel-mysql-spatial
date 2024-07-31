@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Eloquent;
+
 use Illuminate\Database\Eloquent\Model;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery\MockInterface;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Integration;
+
 use Illuminate\Support\Facades\DB;
 
 class MigrationTest extends IntegrationBaseTestCase

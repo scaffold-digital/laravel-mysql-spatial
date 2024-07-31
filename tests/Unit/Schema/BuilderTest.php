@@ -1,6 +1,6 @@
 <?php
 
-namespace Schema;
+namespace Tests\Unit\Schema;
 
 use BaseTestCase;
 use Mockery;

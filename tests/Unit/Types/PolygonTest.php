@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
