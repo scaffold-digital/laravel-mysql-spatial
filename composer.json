@@ -26,8 +26,8 @@
         "phpunit/phpunit": "^9.5.10",
         "laravel/laravel": "^9.0",
         "doctrine/dbal": "^3.8",
-        "laravel/browser-kit-testing": "^6.4",
-        "mockery/mockery": "^1.4.4"
+        "mockery/mockery": "^1.4.4",
+        "orchestra/testbench-core": "^7.44"
     },
     "autoload": {
         "psr-4": {
@@ -38,7 +38,10 @@
         "classmap": [
             "tests/Unit",
             "tests/Integration"
-        ]
+        ],
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "extra": {
         "branch-alias": {

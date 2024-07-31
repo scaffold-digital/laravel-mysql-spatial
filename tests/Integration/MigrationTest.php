@@ -1,13 +1,29 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
+namespace Tests\Integration;
 
-class MigrationTest extends IntegrationBaseTestCase
+use Illuminate\Support\Facades\DB;
+use Tests\Integration\Migrations\CreateTables;
+use Tests\Integration\Migrations\UpdateTables;
+use Tests\TestCase;
+
+class MigrationTest extends TestCase
 {
-    protected $migrations = [
-        CreateLocationTable::class,
-        UpdateLocationTable::class,
-    ];
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        (new CreateTables)->up();
+        (new UpdateTables)->up();
+    }
+
+    public function tearDown(): void
+    {
+        (new UpdateTables)->down();
+        (new CreateTables)->down();
+
+        parent::tearDown();
+    }
 
     public function testTableWasCreatedWithRightTypes()
     {

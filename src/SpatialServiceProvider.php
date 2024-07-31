@@ -5,6 +5,7 @@ namespace ScaffoldDigital\LaravelMysqlSpatial;
 use Doctrine\DBAL\Types\Type as DoctrineType;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\DatabaseServiceProvider;
+use Illuminate\Support\Facades\DB;
 use ScaffoldDigital\LaravelMysqlSpatial\Connectors\ConnectionFactory;
 use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\Geometry;
 use ScaffoldDigital\LaravelMysqlSpatial\Doctrine\GeometryCollection;
@@ -41,10 +42,6 @@ class SpatialServiceProvider extends DatabaseServiceProvider
             return new DatabaseManager($app, $app['db.factory']);
         });
 
-        $this->app->singleton('db.schema', function ($app) {
-            return $app['db']->connection()->getSchemaBuilder();
-        });
-
         if (class_exists(DoctrineType::class)) {
             // Prevent geometry type fields from throwing a 'type not found' error when changing them
             $geometries = [
@@ -56,12 +53,12 @@ class SpatialServiceProvider extends DatabaseServiceProvider
                 'multilinestring'    => MultiLineString::class,
                 'multipolygon'       => MultiPolygon::class,
                 'geometrycollection' => GeometryCollection::class,
+                'geomcollection'     => GeometryCollection::class,
             ];
-            $typeNames = array_keys(DoctrineType::getTypesMap());
+
             foreach ($geometries as $type => $class) {
-                if (!in_array($type, $typeNames)) {
-                    DoctrineType::addType($type, $class);
-                }
+                DB::registerDoctrineType($class, $type, $type);
+                DB::connection()->registerDoctrineType($class, $type, $type);
             }
         }
     }
