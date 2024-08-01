@@ -1,8 +1,10 @@
 <?php
 
-namespace Stubs;
+namespace Tests\Unit\Stubs;
 
-class PDOStub extends \PDO
+use PDO;
+
+class PDOStub extends PDO
 {
     public function __construct(string $driver = 'mysql')
     {

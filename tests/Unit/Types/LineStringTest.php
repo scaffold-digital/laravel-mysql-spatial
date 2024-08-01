@@ -1,9 +1,12 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\TestCase;
 
-class LineStringTest extends BaseTestCase
+class LineStringTest extends TestCase
 {
     private $points;
 
@@ -47,7 +50,7 @@ class LineStringTest extends BaseTestCase
     {
         $this->assertException(
             \ScaffoldDigital\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
-            sprintf('Expected %s, got %s', \GeoJson\Geometry\LineString::class, GeoJson\Geometry\Point::class)
+            sprintf('Expected %s, got %s', \GeoJson\Geometry\LineString::class, \GeoJson\Geometry\Point::class)
         );
         LineString::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
     }

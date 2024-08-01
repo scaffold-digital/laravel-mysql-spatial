@@ -1,9 +1,13 @@
 <?php
 
+namespace Tests\Unit\Types;
+
+use InvalidArgumentException;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\TestCase;
 
-class MultiPointTest extends BaseTestCase
+class MultiPointTest extends TestCase
 {
     public function testFromWKT()
     {
@@ -44,7 +48,7 @@ class MultiPointTest extends BaseTestCase
     {
         $this->assertException(
             \ScaffoldDigital\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
-            sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPoint::class, GeoJson\Geometry\Point::class)
+            sprintf('Expected %s, got %s', \GeoJson\Geometry\MultiPoint::class, \GeoJson\Geometry\Point::class)
         );
         MultiPoint::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
     }

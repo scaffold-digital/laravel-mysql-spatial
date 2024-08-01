@@ -1,8 +1,7 @@
 <?php
 
-namespace Eloquent;
+namespace Tests\Unit\Eloquent;
 
-use BaseTestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
@@ -14,8 +13,9 @@ use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\TestCase;
 
-class BuilderTest extends BaseTestCase
+class BuilderTest extends TestCase
 {
     protected $builder;
     protected $queryBuilder;

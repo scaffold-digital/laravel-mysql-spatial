@@ -1,13 +1,13 @@
 <?php
 
-namespace Schema;
+namespace Tests\Unit\Schema;
 
-use BaseTestCase;
 use Illuminate\Database\Schema\ColumnDefinition;
 use Mockery;
 use ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint;
+use Tests\TestCase;
 
-class BlueprintTest extends BaseTestCase
+class BlueprintTest extends TestCase
 {
     /**
      * @var \ScaffoldDigital\LaravelMysqlSpatial\Schema\Blueprint

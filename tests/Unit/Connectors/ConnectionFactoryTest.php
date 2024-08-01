@@ -1,11 +1,15 @@
 <?php
 
+namespace Tests\Unit\Connectors;
+
 use Illuminate\Container\Container;
+use Mockery;
 use ScaffoldDigital\LaravelMysqlSpatial\Connectors\ConnectionFactory;
 use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
-use Stubs\PDOStub;
+use Tests\TestCase;
+use Tests\Unit\Stubs\PDOStub;
 
-class ConnectionFactoryTest extends BaseTestCase
+class ConnectionFactoryTest extends TestCase
 {
     public function testMakeCallsCreateConnection()
     {

@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\TestCase;
 
-class PolygonTest extends BaseTestCase
+class PolygonTest extends TestCase
 {
     private $polygon;
 

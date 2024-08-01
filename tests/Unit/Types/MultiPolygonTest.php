@@ -1,11 +1,15 @@
 <?php
 
+namespace Tests\Unit\Types;
+
+use InvalidArgumentException;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\TestCase;
 
-class MultiPolygonTest extends BaseTestCase
+class MultiPolygonTest extends TestCase
 {
     public function testFromWKT()
     {
@@ -67,7 +71,7 @@ class MultiPolygonTest extends BaseTestCase
     {
         $this->assertException(
             \ScaffoldDigital\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
-            sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPolygon::class, GeoJson\Geometry\Point::class)
+            sprintf('Expected %s, got %s', \GeoJson\Geometry\MultiPolygon::class, \GeoJson\Geometry\Point::class)
         );
         MultiPolygon::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
     }
