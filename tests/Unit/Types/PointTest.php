@@ -1,8 +1,11 @@
 <?php
 
-use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+namespace Tests\Unit\Types;
 
-class PointTest extends BaseTestCase
+use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\TestCase;
+
+class PointTest extends TestCase
 {
     public function testFromWKT()
     {

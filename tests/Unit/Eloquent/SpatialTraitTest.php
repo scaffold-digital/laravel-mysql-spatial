@@ -1,13 +1,18 @@
 <?php
 
+namespace Tests\Unit\Eloquent;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PDO;
+use PDOStatement;
 use ScaffoldDigital\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException;
 use ScaffoldDigital\LaravelMysqlSpatial\MysqlConnection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
+use Tests\TestCase;
 
-class SpatialTraitTest extends IntegrationBaseTestCase
+class SpatialTraitTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 

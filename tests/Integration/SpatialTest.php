@@ -1,18 +1,36 @@
 <?php
 
+namespace Tests\Integration;
+
 use ScaffoldDigital\LaravelMysqlSpatial\Types\GeometryCollection;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\LineString;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPoint;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\MultiPolygon;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Point;
 use ScaffoldDigital\LaravelMysqlSpatial\Types\Polygon;
+use Tests\Integration\Migrations\CreateTables;
+use Tests\Integration\Migrations\UpdateTables;
+use Tests\Integration\Models\GeometryModel;
+use Tests\Integration\Models\NoSpatialFieldsModel;
+use Tests\TestCase;
 
-class SpatialTest extends IntegrationBaseTestCase
+class SpatialTest extends TestCase
 {
-    protected $migrations = [
-        CreateLocationTable::class,
-        UpdateLocationTable::class,
-    ];
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        (new CreateTables)->up();
+        (new UpdateTables)->up();
+    }
+
+    public function tearDown(): void
+    {
+        (new UpdateTables)->down();
+        (new CreateTables)->down();
+
+        parent::tearDown();
+    }
 
     public function testSpatialFieldsNotDefinedException()
     {
@@ -188,11 +206,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $this->assertTrue($b->contains('location', $loc2->location));
         $this->assertFalse($b->contains('location', $loc3->location));
 
-        if ($this->after_fix) {
-            $c = GeometryModel::distanceSphere('location', $loc1->location, 44.741406484236)->get();
-        } else {
-            $c = GeometryModel::distanceSphere('location', $loc1->location, 44.741406484587)->get();
-        }
+        $c = GeometryModel::distanceSphere('location', $loc1->location, 44.741406484236)->get();
         $this->assertCount(1, $c);
         $this->assertTrue($c->contains('location', $loc1->location));
         $this->assertFalse($c->contains('location', $loc2->location));
@@ -228,12 +242,7 @@ class SpatialTest extends IntegrationBaseTestCase
         $a = GeometryModel::distanceSphereValue('location', $loc1->location)->get();
         $this->assertCount(2, $a);
         $this->assertEquals(0, $a[0]->distance);
-
-        if ($this->after_fix) {
-            $this->assertEquals(44.741406484236215, $a[1]->distance);
-        } else {
-            $this->assertEquals(44.7414064845, $a[1]->distance); // PHP floats' 11th+ digits don't matter
-        }
+        $this->assertEquals(44.741406484236215, $a[1]->distance);
     }
 
     public function testOrderBySpatialWithUnknownFunction()
