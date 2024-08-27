@@ -32,10 +32,6 @@ class SpatialServiceProvider extends DatabaseServiceProvider
         $this->app->singleton('db', function ($app) {
             return new DatabaseManager($app, $app['db.factory']);
         });
-
-        $this->app->singleton('db.schema', function ($app) {
-            return $app['db']->connection()->getSchemaBuilder();
-        });
     }
 
     public function boot()
