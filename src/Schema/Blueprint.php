@@ -114,13 +114,13 @@ class Blueprint extends IlluminateBlueprint
      * Specify a spatial index for the table.
      *
      * @param string|array $columns
-     * @param string       $name
-     *
+     * @param string|null       $name
+     * @param string|null       $operatorClass
      * @return \Illuminate\Support\Fluent
      */
-    public function spatialIndex($columns, $name = null)
+    public function spatialIndex($columns, $name = null, $operatorClass = null)
     {
-        return $this->indexCommand('spatial', $columns, $name);
+        return $this->indexCommand('spatial', $columns, $name, $operatorClass);
     }
 
     /**
